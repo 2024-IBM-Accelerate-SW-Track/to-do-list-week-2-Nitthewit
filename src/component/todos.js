@@ -2,13 +2,11 @@ import React from "react";
 import "../component/todos.css";
 import {
   Card,
-  CardContent,
   Grid,
   ListItemButton,
   ListItemText,
   Checkbox,
 } from "@mui/material";
-import { Left } from "react-bootstrap/lib/Media";
 
 // 1. This component formats and returns the list of todos.
 // 2. Treat the question mark like an if statement.
@@ -28,7 +26,7 @@ const Todos = ({ todos, deleteTodo }) => {
             <ListItemButton component="a" href="#simple-list">
               <Checkbox
                 style={{ paddingLeft: 0 }}
-                color:primary
+                color="primary"
                 onClick={() => deleteTodo(todo.id)}
               />
               <ListItemText primary={todo.content} secondary={todo.date} />
@@ -38,7 +36,7 @@ const Todos = ({ todos, deleteTodo }) => {
       );
     })
   ) : (
-    <p>You have no todo's left </p>
+    <p>You have no todo's left</p>
   );
   // Lastly, return the todoList constant that we created above to show all of the items on the screen.
   return (
