@@ -11,9 +11,29 @@ class Home extends Component {
       todos: [],
     };
   }
+
+  deleteTodo = (id) => {
+    const todos = this.state.todos.filter((todo) => {
+      return todo.id !== id;
+    });
+    this.setState({
+      todos: todos,
+    });
+  };
+
   // the addTodo function simply creates a new array that includes the user submitted todo item and then
   // updates the state with the new list.
   addTodo = (todo) => {
+    // Check if the todo item already exists in the list
+    const existingTodo = this.state.todos.find(
+      (t) => t.content === todo.content
+    );
+
+    if (existingTodo) {
+      // If the todo item exists, do nothing and return
+      return;
+    }
+
     // In React, keys or ids in a list help identify which items have changed, been added or removed. Keys
     // should not share duplicate values.
     // To avoid having dup values, we use the Math.random() function to generate a random value for a todo id.
@@ -27,6 +47,7 @@ class Home extends Component {
       todos: new_list,
     });
   };
+
   render() {
     return (
       <div className="Home">
@@ -36,7 +57,7 @@ class Home extends Component {
         <AddTodo addTodo={this.addTodo} />
         {/* When returning the Todos component, todos is a prop passed to the todos.js file
          to format and render the current todo list state */}
-        <Todos todos={this.state.todos} />
+        <Todos todos={this.state.todos} deleteTodo={this.deleteTodo} />
       </div>
     );
   }
